@@ -1,6 +1,7 @@
 import 'package:cruftybay/app/app_color.dart';
 import 'package:cruftybay/features/auth/ui/screens/otp_verification_screen.dart';
 import 'package:cruftybay/features/auth/ui/widgets/app_logo_widget.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 
 class EmailVerificationScreen extends StatefulWidget {
@@ -44,14 +45,26 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                 ),
                 const SizedBox(height: 24),
                 TextFormField(
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                   decoration: const InputDecoration(
                     hintText: 'Email address',
                   ),
+                  validator: (String? value) {
+                    if (value?.trim().isEmpty ?? true) {
+                      return 'Enter your email';
+                    }
+                    if (EmailValidator.validate(value!) == false) {
+                      return 'Enter a valid email address';
+                    }
+                    return null;
+                  },
                 ),
                 const SizedBox(height: 16),
-                ElevatedButton(onPressed: () {
-                  Navigator.pushNamed(context, OtpVerificationScreen.name);
-                }, child: const Text('Next'))
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, OtpVerificationScreen.name);
+                    },
+                    child: const Text('Next'))
               ],
             ),
           ),

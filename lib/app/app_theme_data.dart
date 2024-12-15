@@ -24,10 +24,7 @@ class AppThemeData {
       /// Input Decoration Theme
       inputDecorationTheme: const InputDecorationTheme(
         hintStyle: TextStyle(
-          color: Colors.grey,
-          fontWeight: FontWeight.w400,
-          fontSize: 16
-        ),
+            color: Colors.grey, fontWeight: FontWeight.w400, fontSize: 16),
         fillColor: Colors.white,
         filled: true,
         contentPadding: EdgeInsets.symmetric(
@@ -45,7 +42,6 @@ class AppThemeData {
         ),
       ),
 
-
       ///ElevatedButton Theme
       elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
@@ -53,26 +49,31 @@ class AppThemeData {
               foregroundColor: Colors.white,
               fixedSize: const Size.fromWidth(double.maxFinite),
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8)
-              ),
-
+                  borderRadius: BorderRadius.circular(8)),
               padding: const EdgeInsets.symmetric(vertical: 12),
-              textStyle: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w400
-              )
-          )
+              textStyle:
+                  const TextStyle(fontSize: 16, fontWeight: FontWeight.w400))),
+
+      /// TextButton Theme
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          textStyle: const TextStyle(
+            color: AppColors.themeColor,
+            fontSize: 16,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
       ),
     );
   }
 
-
-
   static ThemeData get darkThemeData {
     return ThemeData(
-        colorSchemeSeed: AppColors.themeColor,
-        progressIndicatorTheme:
-            const ProgressIndicatorThemeData(color: AppColors.themeColor),
-        brightness: Brightness.dark);
+      colorSchemeSeed: AppColors.themeColor,
+      progressIndicatorTheme: const ProgressIndicatorThemeData(
+        color: AppColors.themeColor,
+      ),
+      brightness: Brightness.dark,
+    );
   }
 }
