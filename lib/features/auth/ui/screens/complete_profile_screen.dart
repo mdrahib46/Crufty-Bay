@@ -93,6 +93,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
             autovalidateMode: AutovalidateMode.onUserInteraction,
             controller: _mobileTEController,
             decoration: const InputDecoration(hintText: 'Mobile Name'),
+            maxLength: 11,
             validator: (String? value) {
               final regex = RegExp(r'^01[3-9]\d{8}$');
               if (value?.trim().isEmpty ?? true) {
