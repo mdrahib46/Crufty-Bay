@@ -15,7 +15,7 @@ class MainBottomNavScreen extends StatefulWidget {
 
 class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
   final MainBottomNabController bottomNabController = Get.find<MainBottomNabController>();
-  final List<Widget> _screens = [
+  final List<Widget> _screens = const [
     HomeScreen(),
     HomeScreen(),
     HomeScreen(),
@@ -34,7 +34,7 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
             destinations: const [
               NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
               NavigationDestination(
-                  icon: Icon(Icons.view_comfy_alt), label: 'Categories'),
+                  icon: Icon(Icons.view_list), label: 'Categories'),
               NavigationDestination(icon: Icon(Icons.shopping_cart), label: 'Cart'),
               NavigationDestination(icon: Icon(Icons.redeem), label: 'Wish List'),
             ],

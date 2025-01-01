@@ -1,11 +1,6 @@
 import 'package:cruftybay/app/app_color.dart';
-import 'package:cruftybay/app/asset_path.dart';
-import 'package:cruftybay/common/ui/controllers/main_bottom_nab_controllers.dart';
 import 'package:cruftybay/common/ui/screens/main_bottom_nav_screen.dart';
-import 'package:cruftybay/features/auth/ui/screens/email_verification_screen.dart';
-import 'package:cruftybay/features/home/ui/screens/home_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 import '../widgets/app_logo_widget.dart';
 
