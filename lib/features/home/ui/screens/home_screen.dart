@@ -1,12 +1,14 @@
 import 'package:cruftybay/app/asset_path.dart';
+import 'package:cruftybay/common/ui/controllers/main_bottom_nab_controllers.dart';
 import 'package:cruftybay/features/home/ui/widgets/appbar_icon_button.dart';
-import 'package:cruftybay/features/home/ui/widgets/category_item_widget.dart';
+import 'package:cruftybay/common/ui/widgets/category_item_widget.dart';
 import 'package:cruftybay/features/home/ui/widgets/home_carousel_Slider.dart';
 import 'package:cruftybay/features/home/ui/widgets/home_section_header.dart';
-import 'package:cruftybay/features/home/ui/widgets/product_item_widget.dart';
+import 'package:cruftybay/common/ui/widgets/product_item_widget.dart';
 import 'package:cruftybay/features/home/ui/widgets/search-bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 
 
@@ -38,7 +40,9 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 16),
               HomeSectionHeader(
                 title: "Category",
-                onTap: () {},
+                onTap: () {
+                 Get.find<MainBottomNabController>().moveToCategory();
+                },
               ),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,

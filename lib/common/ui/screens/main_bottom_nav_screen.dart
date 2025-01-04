@@ -1,5 +1,6 @@
 import 'package:cruftybay/app/app.dart';
 import 'package:cruftybay/common/ui/controllers/main_bottom_nab_controllers.dart';
+import 'package:cruftybay/features/category/ui/screens/category_list_screen.dart';
 import 'package:cruftybay/features/home/ui/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,7 +18,7 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
   final MainBottomNabController bottomNabController = Get.find<MainBottomNabController>();
   final List<Widget> _screens = const [
     HomeScreen(),
-    HomeScreen(),
+    CategoryListScreen(),
     HomeScreen(),
     HomeScreen(),
   ];
@@ -38,8 +39,6 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
               NavigationDestination(icon: Icon(Icons.shopping_cart), label: 'Cart'),
               NavigationDestination(icon: Icon(Icons.redeem), label: 'Wish List'),
             ],
-
-
           ),
         );
       }
