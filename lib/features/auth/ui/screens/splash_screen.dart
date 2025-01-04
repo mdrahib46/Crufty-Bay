@@ -1,5 +1,6 @@
 import 'package:cruftybay/app/app_color.dart';
-import 'package:cruftybay/common/ui/screens/main_bottom_nav_screen.dart';
+
+import 'package:cruftybay/features/common/ui/screens/main_bottom_nav_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/app_logo_widget.dart';

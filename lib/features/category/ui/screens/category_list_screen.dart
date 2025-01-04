@@ -1,5 +1,6 @@
-import 'package:cruftybay/common/ui/controllers/main_bottom_nab_controllers.dart';
-import 'package:cruftybay/common/ui/widgets/category_item_widget.dart';
+
+import 'package:cruftybay/features/common/ui/controllers/main_bottom_nab_controllers.dart';
+import 'package:cruftybay/features/common/ui/widgets/category_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

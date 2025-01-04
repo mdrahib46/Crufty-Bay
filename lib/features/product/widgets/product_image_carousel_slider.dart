@@ -2,21 +2,21 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cruftybay/app/app_color.dart';
 import 'package:flutter/material.dart';
 
-class HomeCarouselSlider extends StatefulWidget {
-  const HomeCarouselSlider({
+class ProductImageCarouselSlider extends StatefulWidget {
+  const ProductImageCarouselSlider({
     super.key,
   });
 
   @override
-  State<HomeCarouselSlider> createState() => _HomeCarouselSliderState();
+  State<ProductImageCarouselSlider> createState() => _ProductImageCarouselSliderState();
 }
 
-class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
+class _ProductImageCarouselSliderState extends State<ProductImageCarouselSlider> {
   final ValueNotifier<int> _selectedIndex = ValueNotifier(0);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Stack(
       children: [
         CarouselSlider(
           options: CarouselOptions(
@@ -46,28 +46,32 @@ class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
             );
           }).toList(),
         ),
-        const SizedBox(height: 8),
-        ValueListenableBuilder(
-          valueListenable: _selectedIndex,
-          builder: (context, value, _) {
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                for (int i = 0; i < 5; i++)
-                  Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 2),
-                    height: 12,
-                    width: 12,
-                    decoration: BoxDecoration(
-                        color: value == i
-                            ? AppColors.themeColor
-                            : Colors.transparent,
-                        border: Border.all(color: Colors.grey.shade300),
-                        borderRadius: BorderRadius.circular(20)),
-                  )
-              ],
-            );
-          },
+        Positioned(
+          bottom: 5,
+          left: 0,
+          right: 0,
+          child: ValueListenableBuilder(
+            valueListenable: _selectedIndex,
+            builder: (context, value, _) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  for (int i = 0; i < 5; i++)
+                    Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 2),
+                      height: 12,
+                      width: 12,
+                      decoration: BoxDecoration(
+                          color: value == i
+                              ? AppColors.themeColor
+                              : Colors.transparent,
+                          border: Border.all(color: Colors.grey.shade300),
+                          borderRadius: BorderRadius.circular(20)),
+                    )
+                ],
+              );
+            },
+          ),
         )
       ],
     );
