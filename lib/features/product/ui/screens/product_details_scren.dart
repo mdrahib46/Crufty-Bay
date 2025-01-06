@@ -1,4 +1,5 @@
 import 'package:cruftybay/app/app_color.dart';
+import 'package:cruftybay/features/product/ui/screens/product_review_screen.dart';
 import 'package:cruftybay/features/product/widgets/color_picker_widget.dart';
 import 'package:cruftybay/features/product/widgets/product_image_carousel_slider.dart';
 import 'package:cruftybay/features/product/widgets/product_incre_decre_button.dart';
@@ -80,7 +81,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 8.0),
                                           child: TextButton(
-                                            onPressed: () {},
+                                            onPressed: _moveToReviewScreen,
                                             child: const Text('Reviews'),
                                           ),
                                         ),
@@ -154,7 +155,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   Widget buildPriceAndAddToCartSection(
       BuildContext context, TextTheme textTheme) {
     return Container(
-      height: 100,
+      height: 90,
       width: MediaQuery.of(context).size.width,
       color: AppColors.themeColor.withOpacity(0.2),
       padding: const EdgeInsets.all(16),
@@ -190,5 +191,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         ],
       ),
     );
+  }
+
+  void _moveToReviewScreen() {
+    Navigator.pushNamed(context, ProductReviewScreen.name);
+    setState(() {});
   }
 }

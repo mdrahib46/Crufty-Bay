@@ -1,4 +1,5 @@
 import 'package:cruftybay/app/app_color.dart';
+import 'package:cruftybay/app/asset_path.dart';
 import 'package:cruftybay/features/product/ui/screens/product_details_scren.dart';
 import 'package:flutter/material.dart';
 class ProductItemWidget extends StatelessWidget {
@@ -22,6 +23,7 @@ class ProductItemWidget extends StatelessWidget {
           child: Column(
             children: [
               Container(
+                padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
                     color: AppColors.themeColor.withOpacity(0.12),
                     borderRadius: const BorderRadius.only(
@@ -29,7 +31,7 @@ class ProductItemWidget extends StatelessWidget {
                       topRight: Radius.circular(16),
                     )),
                 child: Image.asset(
-                  'assets/images/product.png',
+                  AssetPath.dummyImagePng,
                   fit: BoxFit.fill,
                   width: 140,
                   height: 90,
@@ -40,7 +42,7 @@ class ProductItemWidget extends StatelessWidget {
                 child: Column(
                   children: [
                     const Text(
-                      'HP 15-fd0292TU Core i5 13th Gen',
+                      'Nike Shoe - AK45394 New year deal',
                       maxLines: 1,
                       style: TextStyle(
                         fontWeight: FontWeight.w600,

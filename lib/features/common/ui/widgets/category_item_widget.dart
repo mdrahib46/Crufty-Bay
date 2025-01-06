@@ -21,15 +21,14 @@ class CategoryItemWidget extends StatelessWidget {
               color: AppColors.themeColor.withOpacity(0.14),
               borderRadius: BorderRadius.circular(8),
             ),
-            child: const Icon(
-              Icons.computer,
+            child:  const Icon(Icons.shopping_cart,
               size: 48,
               color: AppColors.themeColor,
             ),
           ),
           const SizedBox(width: 4),
           const Text(
-            'Computer',
+            'Shoes',
             style: TextStyle(
                 fontSize: 16,
                 color: AppColors.themeColor,
