@@ -8,10 +8,12 @@ class ProductImageCarouselSlider extends StatefulWidget {
   });
 
   @override
-  State<ProductImageCarouselSlider> createState() => _ProductImageCarouselSliderState();
+  State<ProductImageCarouselSlider> createState() =>
+      _ProductImageCarouselSliderState();
 }
 
-class _ProductImageCarouselSliderState extends State<ProductImageCarouselSlider> {
+class _ProductImageCarouselSliderState
+    extends State<ProductImageCarouselSlider> {
   final ValueNotifier<int> _selectedIndex = ValueNotifier(0);
 
   @override
@@ -20,7 +22,7 @@ class _ProductImageCarouselSliderState extends State<ProductImageCarouselSlider>
       children: [
         CarouselSlider(
           options: CarouselOptions(
-              height: 170.0,
+              height: 220.0,
               viewportFraction: 0.95,
               onPageChanged: (currentIndex, reason) {
                 _selectedIndex.value = currentIndex;
@@ -30,16 +32,14 @@ class _ProductImageCarouselSliderState extends State<ProductImageCarouselSlider>
               builder: (BuildContext context) {
                 return Container(
                   width: MediaQuery.of(context).size.width,
-                  margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                  // margin: const EdgeInsets.only(left: 2),
                   decoration: BoxDecoration(
-                    color: AppColors.themeColor,
-                    borderRadius: BorderRadius.circular(8),
+                    color: Colors.black12,
                   ),
-                  child: Center(
-                    child: Text(
-                      'text $i',
-                      style: const TextStyle(fontSize: 16.0),
-                    ),
+                  alignment: Alignment.center,
+                  child: Text(
+                    'text $i',
+                    style: const TextStyle(fontSize: 16.0),
                   ),
                 );
               },
@@ -62,12 +62,11 @@ class _ProductImageCarouselSliderState extends State<ProductImageCarouselSlider>
                       height: 12,
                       width: 12,
                       decoration: BoxDecoration(
-                          color: value == i
-                              ? AppColors.themeColor
-                              : Colors.transparent,
-                          border: Border.all(color: Colors.grey.shade300),
-                          borderRadius: BorderRadius.circular(20)),
-                    )
+                        color: value == i ? AppColors.themeColor : Colors.white,
+                        border: Border.all(color: Colors.grey.shade300),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
                 ],
               );
             },

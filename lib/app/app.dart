@@ -8,6 +8,7 @@ import 'package:cruftybay/features/category/ui/screens/category_list_screen.dart
 import 'package:cruftybay/features/common/ui/screens/main_bottom_nav_screen.dart';
 import 'package:cruftybay/features/product/ui/screens/product_details_scren.dart';
 import 'package:cruftybay/features/product/ui/screens/product_list_screen.dart';
+import 'package:cruftybay/features/wishlist/ui/screens/wish_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -42,9 +43,11 @@ class CruftyBay extends StatelessWidget {
         } else if (settings.name == ProductListScreen.name) {
           String name = settings.arguments as String;
           widget = ProductListScreen(categoryName: name);
-        }else if(settings.name == ProductDetailsScreen.name){
+        } else if (settings.name == ProductDetailsScreen.name) {
           int productId = settings.arguments as int;
-          widget = ProductDetailsScreen(productId: productId,);
+          widget = ProductDetailsScreen(
+            productId: productId,
+          );
         }
         return MaterialPageRoute(builder: (ctx) {
           return widget;
