@@ -6,6 +6,7 @@ import 'package:cruftybay/features/auth/ui/screens/otp_verification_screen.dart'
 import 'package:cruftybay/features/auth/ui/screens/splash_screen.dart';
 import 'package:cruftybay/features/category/ui/screens/category_list_screen.dart';
 import 'package:cruftybay/features/common/ui/screens/main_bottom_nav_screen.dart';
+import 'package:cruftybay/features/product/ui/screens/create_product_review_screen.dart';
 import 'package:cruftybay/features/product/ui/screens/product_details_scren.dart';
 import 'package:cruftybay/features/product/ui/screens/product_list_screen.dart';
 import 'package:cruftybay/features/product/ui/screens/product_review_screen.dart';
@@ -51,6 +52,9 @@ class CruftyBay extends StatelessWidget {
           );
         }else if(settings.name == ProductReviewScreen.name){
           widget = const ProductReviewScreen();
+        }
+        else if(settings.name == CreateProductReviewScreen.name){
+          widget = const CreateProductReviewScreen();
         }
         return MaterialPageRoute(builder: (ctx) {
           return widget;

@@ -1,6 +1,6 @@
 import 'package:cruftybay/app/app_color.dart';
 import 'package:cruftybay/app/asset_path.dart';
-import 'package:cruftybay/features/product/widgets/product_incre_decre_button.dart';
+import 'package:cruftybay/features/common/ui/widgets/product_incre_decre_button.dart';
 import 'package:flutter/material.dart';
 
 class CartProductItemWidget extends StatelessWidget {
@@ -29,6 +29,7 @@ class CartProductItemWidget extends StatelessWidget {
               child: Column(
                 children: [
                   Row(
+                   mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Expanded(
                         child: Column(
