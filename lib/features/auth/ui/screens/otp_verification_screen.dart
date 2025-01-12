@@ -1,7 +1,7 @@
 import 'package:cruftybay/app/app_color.dart';
 import 'package:cruftybay/app/app_constants.dart';
-import 'package:cruftybay/features/auth/ui/screens/complete_profile_screen.dart';
 import 'package:cruftybay/features/auth/ui/widgets/app_logo_widget.dart';
+import 'package:cruftybay/features/auth/ui/widgets/otp_verification_controller.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +24,8 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   late Timer timer;
 
   RxBool enableResendCodeButton = false.obs;
+
+  final OTPVerificationController _otpVerificationController = Get.find<OTPVerificationController>();
 
   @override
   void initState() {
@@ -90,7 +92,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                   const SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, CompleteProfileScreen.name);
+
                     },
                     child: const Text('Next'),
                   ),
@@ -138,4 +140,10 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     timer.cancel();
     super.dispose();
   }
+
+  // Fluture<void> _onTapNextButton() async{
+  //     if(_formKey.currentState!.validate()){
+  //       bool isSuccess = _otpVerificationController.verifyOtpController(, otp)
+  //     }
+  // }
 }

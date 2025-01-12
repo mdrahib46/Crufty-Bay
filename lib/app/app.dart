@@ -10,7 +10,6 @@ import 'package:cruftybay/features/product/ui/screens/create_product_review_scre
 import 'package:cruftybay/features/product/ui/screens/product_details_scren.dart';
 import 'package:cruftybay/features/product/ui/screens/product_list_screen.dart';
 import 'package:cruftybay/features/product/ui/screens/product_review_screen.dart';
-import 'package:cruftybay/features/wishlist/ui/screens/wish_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -20,6 +19,7 @@ class CruftyBay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      initialRoute: '/',
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.light,
       theme: AppThemeData.lightThemeData,
