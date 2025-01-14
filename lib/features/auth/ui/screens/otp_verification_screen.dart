@@ -1,16 +1,21 @@
 import 'package:cruftybay/app/app_color.dart';
 import 'package:cruftybay/app/app_constants.dart';
+import 'package:cruftybay/features/auth/ui/screens/complete_profile_screen.dart';
 import 'package:cruftybay/features/auth/ui/widgets/app_logo_widget.dart';
-import 'package:cruftybay/features/auth/ui/widgets/otp_verification_controller.dart';
+import 'package:cruftybay/features/auth/ui/controller/otp_verification_controller.dart';
+import 'package:cruftybay/features/common/ui/screens/main_bottom_nav_screen.dart';
+import 'package:cruftybay/features/common/ui/widgets/center_circular_progress_indicator.dart';
+import 'package:cruftybay/features/common/ui/widgets/snackbar_message.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
 class OtpVerificationScreen extends StatefulWidget {
-  const OtpVerificationScreen({super.key});
+  const OtpVerificationScreen({super.key, required this.email});
 
   static const String name = "/Otp-VerificationScreen";
+  final String email;
 
   @override
   State<OtpVerificationScreen> createState() => _OtpVerificationScreenState();
@@ -68,9 +73,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                   ),
                   Text(
                     'A 4 digit otp has been sent',
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          color: Colors.grey,
-                        ),
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Colors.grey),
                   ),
                   const SizedBox(height: 24),
                   PinCodeTextField(
@@ -88,13 +91,24 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                     ),
                     keyboardType: TextInputType.number,
                     controller: _otpTEController,
+                    validator: (String? value) {
+                      if (value?.length != 6) {
+                        return "Enter your OTP";
+                      }
+                      return null;
+                    },
                   ),
                   const SizedBox(height: 16),
-                  ElevatedButton(
-                    onPressed: () {
-
+                  GetBuilder<OTPVerificationController>(
+                    builder: (controller) {
+                      if (controller.inProgress) {
+                        return const CenterCircularProgressIndicator();
+                      }
+                      return ElevatedButton(
+                        onPressed: _onTapNextButton,
+                        child: const Text('Next'),
+                      );
                     },
-                    child: const Text('Next'),
                   ),
                   const SizedBox(height: 24),
                   Obx(
@@ -107,8 +121,9 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                           children: [
                             TextSpan(
                               text: '${_remainingTime}s',
-                              style:
-                                  const TextStyle(color: AppColors.themeColor),
+                              style: const TextStyle(
+                                color: AppColors.themeColor,
+                              ),
                             ),
                           ],
                         ),
@@ -141,9 +156,24 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     super.dispose();
   }
 
-  // Fluture<void> _onTapNextButton() async{
-  //     if(_formKey.currentState!.validate()){
-  //       bool isSuccess = _otpVerificationController.verifyOtpController(, otp)
-  //     }
-  // }
+  Future<void> _onTapNextButton() async {
+    if (_formKey.currentState!.validate()) {
+      final bool response = await _otpVerificationController.verifyOTP(widget.email, _otpTEController.text);
+      if (response) {
+        if (Get.find<OTPVerificationController>().shouldNavigateCompleteProfile) {
+          if (mounted) {
+            Navigator.pushNamed(context, CompleteProfileScreen.name);
+          }
+        } else {
+          if (mounted) {
+            Navigator.pushNamedAndRemoveUntil(context, MainBottomNavScreen.name, (predicate) => false);
+          }
+        }
+      } else {
+        if (mounted) {
+          showSnackBarMessage(context, _otpVerificationController.errorMessage!);
+        }
+      }
+    }
+  }
 }

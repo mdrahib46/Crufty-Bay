@@ -35,7 +35,8 @@ class CruftyBay extends StatelessWidget {
         } else if (settings.name == EmailVerificationScreen.name) {
           widget = const EmailVerificationScreen();
         } else if (settings.name == OtpVerificationScreen.name) {
-          widget = const OtpVerificationScreen();
+          String email = settings.arguments as String;
+          widget = OtpVerificationScreen(email: email);
         } else if (settings.name == CompleteProfileScreen.name) {
           widget = const CompleteProfileScreen();
         } else if (settings.name == MainBottomNavScreen.name) {
@@ -47,13 +48,10 @@ class CruftyBay extends StatelessWidget {
           widget = ProductListScreen(categoryName: name);
         } else if (settings.name == ProductDetailsScreen.name) {
           int productId = settings.arguments as int;
-          widget = ProductDetailsScreen(
-            productId: productId,
-          );
-        }else if(settings.name == ProductReviewScreen.name){
+          widget = ProductDetailsScreen(productId: productId);
+        } else if (settings.name == ProductReviewScreen.name) {
           widget = const ProductReviewScreen();
-        }
-        else if(settings.name == CreateProductReviewScreen.name){
+        } else if (settings.name == CreateProductReviewScreen.name) {
           widget = const CreateProductReviewScreen();
         }
         return MaterialPageRoute(builder: (ctx) {

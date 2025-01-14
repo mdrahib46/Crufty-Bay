@@ -1,5 +1,4 @@
-import 'package:cruftybay/app/app_color.dart';
-import 'package:cruftybay/features/auth/ui/widgets/email_verification_controller.dart';
+import 'package:cruftybay/features/auth/ui/controller/email_verification_controller.dart';
 import 'package:cruftybay/features/auth/ui/screens/otp_verification_screen.dart';
 import 'package:cruftybay/features/auth/ui/widgets/app_logo_widget.dart';
 import 'package:cruftybay/features/common/ui/widgets/center_circular_progress_indicator.dart';
@@ -91,7 +90,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
           .verifyEmail(_emailTEController.text.trim());
       if (isSuccess) {
         if (mounted) {
-          Navigator.pushNamed(context, OtpVerificationScreen.name);
+          Navigator.pushNamed(context, OtpVerificationScreen.name, arguments: _emailTEController.text.trim());
         }
       } else {
         if (mounted) {

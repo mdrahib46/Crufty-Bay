@@ -1,27 +1,33 @@
 import 'package:cruftybay/app/urls.dart';
+import 'package:cruftybay/features/auth/data/model/profile_model.dart';
 import 'package:cruftybay/services/networkcaller/network_response.dart';
 import 'package:cruftybay/services/networkcaller/networkcaller.dart';
 import 'package:get/get.dart';
 
-class OTPVerificationController extends GetxController {
+class ReadProfileController extends GetxController {
   bool _inProgress = false;
-
   bool get inProgress => _inProgress;
 
   String? _errorMessage;
-
   String? get errorMessage => _errorMessage;
 
-  Future<bool> verifyOtpController(String email, String otp) async {
+  ProfileModel? _profileModel;
+  ProfileModel? get profileModel => _profileModel;
+
+  Future<bool> readProfile(String token) async {
     bool isSuccess = false;
     _inProgress = true;
     update();
 
     final NetworkResponse response = await Get.find<NetworkCaller>()
-        .postRequest(Urls.otpVerification(email, otp));
+        .getRequest(Urls.readProfile, accessToken: token);
     if (response.isSuccess) {
       _errorMessage = null;
-      isSuccess = true;
+      if(response.responseData['data'] == null){
+        _profileModel = null;
+      }else{
+        _profileModel = ProfileModel.fromJson(response.responseData['data']);
+      }
     } else {
       _errorMessage = response.errorMessage;
     }
