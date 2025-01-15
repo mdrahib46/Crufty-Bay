@@ -1,3 +1,4 @@
+import 'package:cruftybay/features/auth/ui/controller/complete_profile_Screen_controller.dart';
 import 'package:cruftybay/features/auth/ui/controller/email_verification_controller.dart';
 import 'package:cruftybay/features/auth/ui/controller/otp_verification_controller.dart';
 import 'package:cruftybay/features/auth/ui/controller/read_profile_controller.dart';
@@ -17,5 +18,6 @@ class ControllerBinder extends Bindings{
     Get.put(EmailVerificationController());
     Get.put(OTPVerificationController());
     Get.put(ReadProfileController());
+    Get.put(CreateProfileScreenController());
   }
 }

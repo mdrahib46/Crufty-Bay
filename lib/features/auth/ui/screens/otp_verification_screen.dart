@@ -3,6 +3,7 @@ import 'package:cruftybay/app/app_constants.dart';
 import 'package:cruftybay/features/auth/ui/screens/complete_profile_screen.dart';
 import 'package:cruftybay/features/auth/ui/widgets/app_logo_widget.dart';
 import 'package:cruftybay/features/auth/ui/controller/otp_verification_controller.dart';
+import 'package:cruftybay/features/common/ui/controllers/auth_controller.dart';
 import 'package:cruftybay/features/common/ui/screens/main_bottom_nav_screen.dart';
 import 'package:cruftybay/features/common/ui/widgets/center_circular_progress_indicator.dart';
 import 'package:cruftybay/features/common/ui/widgets/snackbar_message.dart';
@@ -158,8 +159,8 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
 
   Future<void> _onTapNextButton() async {
     if (_formKey.currentState!.validate()) {
-      final bool response = await _otpVerificationController.verifyOTP(widget.email, _otpTEController.text);
-      if (response) {
+      final bool isSuccess = await _otpVerificationController.verifyOTP(widget.email, _otpTEController.text);
+      if (isSuccess) {
         if (Get.find<OTPVerificationController>().shouldNavigateCompleteProfile) {
           if (mounted) {
             Navigator.pushNamed(context, CompleteProfileScreen.name);

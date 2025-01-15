@@ -1,8 +1,15 @@
+import 'package:cruftybay/features/auth/ui/controller/complete_profile_Screen_controller.dart';
 import 'package:cruftybay/features/auth/ui/widgets/app_logo_widget.dart';
+import 'package:cruftybay/features/common/ui/screens/main_bottom_nav_screen.dart';
+import 'package:cruftybay/features/common/ui/widgets/center_circular_progress_indicator.dart';
+import 'package:cruftybay/features/common/ui/widgets/snackbar_message.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CompleteProfileScreen extends StatefulWidget {
   const CompleteProfileScreen({super.key});
+
+
 
   static const name = '/Complete-ProfileScreen';
 
@@ -12,12 +19,26 @@ class CompleteProfileScreen extends StatefulWidget {
 
 class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _firstNameTEController = TextEditingController();
-  final TextEditingController _lastNameTEController = TextEditingController();
-  final TextEditingController _mobileTEController = TextEditingController();
-  final TextEditingController _cityTEController = TextEditingController();
-  final TextEditingController _shippingAddressTEController =
-      TextEditingController();
+  final TextEditingController _customerNameTEController = TextEditingController();
+  final TextEditingController _customerAddressTEController = TextEditingController();
+  final TextEditingController _customerMobileTEController = TextEditingController();
+  final TextEditingController _customerFaxTEController = TextEditingController();
+  final TextEditingController _customerStateTEController = TextEditingController();
+  final TextEditingController _customerCityTEController = TextEditingController();
+  final TextEditingController _customerPostCodeTEController = TextEditingController();
+  final TextEditingController _customerCountryNameTEController = TextEditingController();
+
+  final TextEditingController _shipPersonNameTEController = TextEditingController();
+  final TextEditingController _shipPersonAddressTEController = TextEditingController();
+  final TextEditingController _shipMobileNumberTEController = TextEditingController();
+  final TextEditingController _shipmentStateTEController = TextEditingController();
+  final TextEditingController _shipmentCityTEController = TextEditingController();
+  final TextEditingController _shipmentCountryTEController = TextEditingController();
+  final TextEditingController _shipPostCodeTEController = TextEditingController();
+
+  final CreateProfileScreenController _createProfileScreenController = CreateProfileScreenController();
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -36,20 +57,31 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                 const SizedBox(height: 16),
                 Text(
                   'Complete Profile',
-                  style: Theme.of(context).textTheme.titleLarge,
+                  style: Theme
+                      .of(context)
+                      .textTheme
+                      .titleLarge,
                 ),
                 Text(
                   'Get started with us with your details',
-                  style: Theme.of(context)
+                  style: Theme
+                      .of(context)
                       .textTheme
                       .bodyLarge
                       ?.copyWith(color: Colors.grey),
                 ),
                 _buildForm(),
                 const SizedBox(height: 16),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: const Text('Complete'),
+                GetBuilder<CreateProfileScreenController>(
+                  builder: (controller) {
+                    if(controller.inProgress){
+                      return const CenterCircularProgressIndicator();
+                    }
+                    return ElevatedButton(
+                      onPressed: _onTapNextButton,
+                      child: const Text('Complete'),
+                    );
+                  }
                 ),
               ],
             ),
@@ -63,14 +95,17 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
     return Form(
       key: _formKey,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 8),
           TextFormField(
             autovalidateMode: AutovalidateMode.onUserInteraction,
-            controller: _firstNameTEController,
+            controller: _customerNameTEController,
             decoration: const InputDecoration(hintText: 'First Name'),
             validator: (String? value) {
-              if (value?.trim().isEmpty ?? true) {
+              if (value
+                  ?.trim()
+                  .isEmpty ?? true) {
                 return "Enter your first name";
               }
               return null;
@@ -79,11 +114,14 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
           const SizedBox(height: 8),
           TextFormField(
             autovalidateMode: AutovalidateMode.onUserInteraction,
-            controller: _lastNameTEController,
-            decoration: const InputDecoration(hintText: 'Last Name'),
+            controller: _customerAddressTEController,
+            decoration: const InputDecoration(hintText: 'Address'),
+            maxLines: 2,
             validator: (String? value) {
-              if (value?.trim().isEmpty ?? true) {
-                return "Enter your last name";
+              if (value
+                  ?.trim()
+                  .isEmpty ?? true) {
+                return "Enter your address";
               }
               return null;
             },
@@ -91,12 +129,14 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
           const SizedBox(height: 8),
           TextFormField(
             autovalidateMode: AutovalidateMode.onUserInteraction,
-            controller: _mobileTEController,
-            decoration: const InputDecoration(hintText: 'Mobile Name'),
+            controller: _customerMobileTEController,
+            decoration: const InputDecoration(hintText: 'Mobile'),
             maxLength: 11,
             validator: (String? value) {
               final regex = RegExp(r'^01[3-9]\d{8}$');
-              if (value?.trim().isEmpty ?? true) {
+              if (value
+                  ?.trim()
+                  .isEmpty ?? true) {
                 return 'Enter your mobile number';
               }
               if (!regex.hasMatch(value!)) {
@@ -108,10 +148,43 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
           const SizedBox(height: 8),
           TextFormField(
             autovalidateMode: AutovalidateMode.onUserInteraction,
-            controller: _cityTEController,
+            controller: _customerFaxTEController,
+            decoration: const InputDecoration(hintText: 'Fax Number'),
+            validator: (String? value) {
+              final regex = RegExp(r'^01[3-9]\d{8}$');
+              if (value
+                  ?.trim()
+                  .isEmpty ?? true) {
+                return 'Enter your mobile number';
+              }
+              if (!regex.hasMatch(value!)) {
+                return "Enter your valid mobile number !";
+              }
+              return null;
+            },
+          ),
+          const SizedBox(height: 8),
+          TextFormField(
+            controller: _customerStateTEController,
+            decoration: const InputDecoration(hintText: 'State'),
+            validator: (String? value) {
+              if (value
+                  ?.trim()
+                  .isEmpty ?? true) {
+                return 'Enter your state name';
+              }
+              return null;
+            },
+          ),
+          const SizedBox(height: 8),
+          TextFormField(
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            controller: _customerCityTEController,
             decoration: const InputDecoration(hintText: 'City Name'),
             validator: (String? value) {
-              if (value?.trim().isEmpty ?? true) {
+              if (value
+                  ?.trim()
+                  .isEmpty ?? true) {
                 return "Enter your city name";
               }
               return null;
@@ -119,30 +192,200 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
           ),
           const SizedBox(height: 8),
           TextFormField(
-            maxLines: 3,
-            controller: _shippingAddressTEController,
+            controller: _customerPostCodeTEController,
+            keyboardType: TextInputType.number,
             decoration: const InputDecoration(
-              hintText: 'Shipping Address',
+              hintText: 'Post Code',
             ),
             validator: (String? value) {
-              if (value?.trim().isEmpty ?? true) {
-                return 'Enter your shipping address';
+              if (value
+                  ?.trim()
+                  .isEmpty ?? true) {
+                return 'Enter your post code';
               }
               return null;
             },
           ),
+          const SizedBox(height: 8),
+          TextFormField(
+            controller: _customerCountryNameTEController,
+            decoration: const InputDecoration(hintText: 'Country'),
+            validator: (String? value) {
+              if (value
+                  ?.trim()
+                  .isEmpty ?? true) {
+                return "Enter your country name";
+              }
+              return null;
+            },
+          ),
+          const SizedBox(height: 8),
+          Text('Shipping Address', style: Theme
+              .of(context)
+              .textTheme
+              .titleMedium),
+          const SizedBox(height: 8),
+          TextFormField(
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            controller: _shipPersonNameTEController,
+            decoration: const InputDecoration(hintText: 'Ship_Name'),
+            validator: (String? value) {
+              if (value
+                  ?.trim()
+                  .isEmpty ?? true) {
+                return "Enter your name";
+              }
+              return null;
+            },
+          ),
+          const SizedBox(height: 8),
+          TextFormField(
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            controller: _shipPersonAddressTEController,
+            decoration: const InputDecoration(hintText: 'Ship_Address'),
+            validator: (String? value) {
+              if (value
+                  ?.trim()
+                  .isEmpty ?? true) {
+                return "Enter your name";
+              }
+              return null;
+            },
+          ),
+          const SizedBox(height: 8),
+          TextFormField(
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            controller: _shipMobileNumberTEController,
+            decoration: const InputDecoration(hintText: 'Mobile number'),
+            maxLength: 11,
+            validator: (String? value) {
+              final regex = RegExp(r'^01[3-9]\d{8}$');
+              if (value
+                  ?.trim()
+                  .isEmpty ?? true) {
+                return 'Enter your mobile number';
+              }
+              if (!regex.hasMatch(value!)) {
+                return "Enter your valid mobile number !";
+              }
+              return null;
+            },
+          ),
+          const SizedBox(height: 8),
+          TextFormField(
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            controller: _shipmentStateTEController,
+            decoration: const InputDecoration(hintText: 'Shipment State'),
+            validator: (String? value) {
+              if (value
+                  ?.trim()
+                  .isEmpty ?? true) {
+                return "Enter product shipment state";
+              }
+              return null;
+            },
+          ),
+          const SizedBox(height: 8),
+          TextFormField(
+            maxLines: 2,
+            controller: _shipmentCityTEController,
+            decoration: const InputDecoration(
+              hintText: 'Shipment city',
+            ),
+            validator: (String? value) {
+              if (value
+                  ?.trim()
+                  .isEmpty ?? true) {
+                return 'Enter product shipment city';
+              }
+              return null;
+            },
+          ),
+          const SizedBox(height: 8),
+          TextFormField(
+            controller: _shipPostCodeTEController,
+            keyboardType: TextInputType.number,
+            decoration: const InputDecoration(hintText: 'PostCode'),
+            validator: (String? value) {
+              if (value
+                  ?.trim()
+                  .isEmpty ?? true) {
+                return "Enter your postcode";
+              }
+              return null;
+              //   digejoy702@kvegg.com
+            },
+          ),
+          const SizedBox(height: 8),
+          TextFormField(
+            controller: _shipmentCountryTEController,
+            decoration: const InputDecoration(hintText: 'Shipment Country'),
+            validator: (String? value) {
+              if (value
+                  ?.trim()
+                  .isEmpty ?? true) {
+                return "Enter product shipment country name";
+              }
+              return null;
+            },
+          )
         ],
       ),
     );
   }
 
+
+  Future<void> _onTapNextButton() async {
+    final bool isSuccess = await Get.find<CreateProfileScreenController>().createProfile(
+        cusName: _customerNameTEController.text.trim(),
+        cusAddress: _customerAddressTEController.text.trim(),
+        cusCity: _customerCityTEController.text.trim(),
+        cusState: _customerStateTEController.text.trim(),
+        cusPostCode: _customerPostCodeTEController.text.trim(),
+        cusCountry: _customerCountryNameTEController.text.trim(),
+        cusPhoneNumber: _customerMobileTEController.text.trim(),
+        cusFax: _customerFaxTEController.text.trim(),
+        shipPersonName: _shipPersonNameTEController.text.trim(),
+        shipAddress: _shipPersonAddressTEController.text.trim(),
+        shipCity: _shipmentCityTEController.text.trim(),
+        shipState: _shipmentStateTEController.text.trim(),
+        shipPostCode: _shipPostCodeTEController.text.trim(),
+        shipCountry: _shipmentCountryTEController.text.trim(),
+        shipPhone: _shipMobileNumberTEController.text.trim(),);
+
+    if(isSuccess){
+      if(Get.find<CreateProfileScreenController>().shouldNavigateMainBottomScreen){
+        if(mounted){
+          showSnackBarMessage(context, 'Profile has been created');
+          Navigator.pushNamed(context, MainBottomNavScreen.name);
+        }
+      }
+
+    }else{
+      if(mounted){
+        showSnackBarMessage(context, _createProfileScreenController.errorMessage!);
+      }
+    }
+  }
+
   @override
   void dispose() {
-    _firstNameTEController.dispose();
-    _lastNameTEController.dispose();
-    _mobileTEController.dispose();
-    _cityTEController.dispose();
-    _shippingAddressTEController.dispose();
+    _customerNameTEController.clear();
+    _customerAddressTEController.clear();
+    _customerMobileTEController.clear();
+    _customerFaxTEController.clear();
+    _customerStateTEController.clear();
+    _customerCityTEController.clear();
+    _customerPostCodeTEController.clear();
+    _customerCountryNameTEController.clear();
+
+    _shipPersonNameTEController.clear();
+    _shipPersonAddressTEController.clear();
+    _shipMobileNumberTEController.clear();
+    _shipmentStateTEController.clear();
+    _shipmentCityTEController.clear();
+    _shipmentCountryTEController.clear();
+    _shipPostCodeTEController.clear();
     super.dispose();
   }
 }

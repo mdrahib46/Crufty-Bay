@@ -30,6 +30,7 @@ class OTPVerificationController extends GetxController {
       _errorMessage = null;
       isSuccess = true;
       String token = response.responseData['data'];
+      AuthController.saveAccessToken(token);
       ///Navigate  CompleteProfile Screen Form OTPVerification Screen
 
       await Get.find<ReadProfileController>().readProfile(token);

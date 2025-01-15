@@ -1,7 +1,7 @@
 import 'dart:convert';
 
+import 'package:cruftybay/features/common/ui/controllers/auth_controller.dart';
 import 'package:cruftybay/services/networkcaller/network_response.dart';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:logger/logger.dart';
 
@@ -15,7 +15,8 @@ class NetworkCaller {
       Uri uri = Uri.parse(url);
 
       Map<String, String> headers = {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'token': AuthController.accessToken.toString()
       };
       if(accessToken != null){
         headers['token'] = accessToken;
@@ -51,6 +52,7 @@ class NetworkCaller {
       Uri uri = Uri.parse(url);
       Map<String, String> headers = {
         'content-type': 'application/json',
+        'token': AuthController.accessToken.toString()
       };
       _logRequest(url, headers, body);
       Response response =
