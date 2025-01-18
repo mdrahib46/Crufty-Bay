@@ -18,9 +18,9 @@ class BannerListModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['msg'] = this.msg;
-    if (this.bannerList != null) {
-      data['data'] = this.bannerList!.map((v) => v.toJson()).toList();
+    data['msg'] = msg;
+    if (bannerList != null) {
+      data['data'] = bannerList!.map((v) => v.toJson()).toList();
     }
     return data;
   }

@@ -1,4 +1,6 @@
 import 'package:cruftybay/app/asset_path.dart';
+import 'package:cruftybay/features/common/data/models/category_model.dart';
+import 'package:cruftybay/features/common/ui/controllers/category_list_controller.dart';
 import 'package:cruftybay/features/common/ui/controllers/main_bottom_nab_controllers.dart';
 import 'package:cruftybay/features/common/ui/widgets/category_item_widget.dart';
 import 'package:cruftybay/features/common/ui/widgets/center_circular_progress_indicator.dart';
@@ -25,13 +27,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController _searchBarController = TextEditingController();
-  final HomeCarouselSliderController _homeCarouselSliderController = Get.find<HomeCarouselSliderController>();
 
-  @override
-  void initState() {
-   _homeCarouselSliderController.getHomeBannerList();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,11 +56,18 @@ class _HomeScreenState extends State<HomeScreen> {
                  Get.find<MainBottomNabController>().moveToCategory();
                 },
               ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: _getCategoryList(),
-                ),
+              GetBuilder<CategoryListController>(
+                builder: (controller) {
+                  if(controller.inProgress){
+                    return const CenterCircularProgressIndicator();
+                  }
+                  return SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: _getCategoryList(controller.categoryList),
+                    ),
+                  );
+                }
               ),
               const SizedBox(height: 8),
               HomeSectionHeader(
@@ -109,12 +112,12 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  List<Widget> _getCategoryList() {
+  List<Widget> _getCategoryList(List<CategoryModel> categoryModel) {
     List<Widget> categoryList = [];
-    for (int i = 0; i < 10; i++) {
-      categoryList.add(const Padding(
-        padding: EdgeInsets.only(right: 16.0),
-        child: CategoryItemWidget(),
+    for (int i = 0; i < categoryModel.length; i++) {
+      categoryList.add( Padding(
+        padding: const EdgeInsets.only(right: 16.0),
+        child: CategoryItemWidget(categoryModel: categoryModel[i],),
       ));
     }
     return categoryList;
