@@ -1,7 +1,9 @@
 import 'package:cruftybay/app/asset_path.dart';
 import 'package:cruftybay/features/common/ui/controllers/main_bottom_nab_controllers.dart';
 import 'package:cruftybay/features/common/ui/widgets/category_item_widget.dart';
+import 'package:cruftybay/features/common/ui/widgets/center_circular_progress_indicator.dart';
 import 'package:cruftybay/features/common/ui/widgets/product_item_widget.dart';
+import 'package:cruftybay/features/home/controller/home_banner_list_controller.dart';
 import 'package:cruftybay/features/home/ui/widgets/appbar_icon_button.dart';
 import 'package:cruftybay/features/home/ui/widgets/home_carousel_Slider.dart';
 import 'package:cruftybay/features/home/ui/widgets/home_section_header.dart';
@@ -23,6 +25,13 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController _searchBarController = TextEditingController();
+  final HomeCarouselSliderController _homeCarouselSliderController = Get.find<HomeCarouselSliderController>();
+
+  @override
+  void initState() {
+   _homeCarouselSliderController.getHomeBannerList();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +45,14 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 16),
               ProductSearchBar(searchTEController: _searchBarController),
               const SizedBox(height: 16),
-              const HomeCarouselSlider(),
+              GetBuilder<HomeCarouselSliderController>(
+                builder: (controller) {
+                  if(controller.inProgress){
+                    return const CenterCircularProgressIndicator();
+                  }
+                  return HomeCarouselSlider(bannerList: controller.bannerList,);
+                }
+              ),
               const SizedBox(height: 16),
               HomeSectionHeader(
                 title: "Category",

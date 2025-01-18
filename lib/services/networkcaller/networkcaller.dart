@@ -27,14 +27,7 @@ class NetworkCaller {
       _logResponse(url, response.statusCode, response.headers, response.body);
       if (response.statusCode == 200 ) {
         final decodedMessage = jsonDecode(response.body);
-        if(decodedMessage['msg'] == 'success'){
           return NetworkResponse(isSuccess: true, statusCode: response.statusCode, responseData: decodedMessage);
-        }
-        else{
-          return NetworkResponse(
-              isSuccess: false, statusCode: response.statusCode, errorMessage: "Something went wrong");
-        }
-
       } else {
         return NetworkResponse(
             isSuccess: false, statusCode: response.statusCode);

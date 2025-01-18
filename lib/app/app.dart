@@ -19,7 +19,7 @@ class CruftyBay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      initialRoute: '/',
+      initialRoute: MainBottomNavScreen.name,
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.light,
       theme: AppThemeData.lightThemeData,
@@ -30,16 +30,18 @@ class CruftyBay extends StatelessWidget {
       onGenerateRoute: (RouteSettings settings) {
         late Widget widget;
 
-        if (settings.name == SplashScreen.name) {
-          widget = const SplashScreen();
-        } else if (settings.name == EmailVerificationScreen.name) {
-          widget = const EmailVerificationScreen();
-        } else if (settings.name == OtpVerificationScreen.name) {
-          String email = settings.arguments as String;
-          widget = OtpVerificationScreen(email: email);
-        } else if (settings.name == CompleteProfileScreen.name) {
-          widget = const CompleteProfileScreen();
-        } else if (settings.name == MainBottomNavScreen.name) {
+        // if (settings.name == SplashScreen.name) {
+        //   widget = const SplashScreen();
+        // } else if (settings.name == EmailVerificationScreen.name) {
+        //   widget = const EmailVerificationScreen();
+        // } else if (settings.name == OtpVerificationScreen.name) {
+        //   String email = settings.arguments as String;
+        //   widget = OtpVerificationScreen(email: email);
+        // } else if (settings.name == CompleteProfileScreen.name) {
+        //   widget = const CompleteProfileScreen();
+        // } else
+        //
+        if (settings.name == MainBottomNavScreen.name) {
           widget = const MainBottomNavScreen();
         } else if (settings.name == CategoryListScreen.name) {
           widget = const CategoryListScreen();

@@ -4,6 +4,7 @@ import 'package:cruftybay/features/auth/ui/controller/otp_verification_controlle
 import 'package:cruftybay/features/auth/ui/controller/read_profile_controller.dart';
 import 'package:cruftybay/features/common/ui/controllers/auth_controller.dart';
 import 'package:cruftybay/features/common/ui/controllers/main_bottom_nab_controllers.dart';
+import 'package:cruftybay/features/home/controller/home_banner_list_controller.dart';
 import 'package:cruftybay/services/networkcaller/networkcaller.dart';
 import 'package:get/get.dart';
 
@@ -19,5 +20,6 @@ class ControllerBinder extends Bindings{
     Get.put(OTPVerificationController());
     Get.put(ReadProfileController());
     Get.put(CreateProfileScreenController());
+    Get.put(HomeCarouselSliderController());
   }
 }
