@@ -1,11 +1,15 @@
 import 'package:cruftybay/app/app_color.dart';
 import 'package:cruftybay/app/asset_path.dart';
+import 'package:cruftybay/features/common/data/models/product_model.dart';
 import 'package:cruftybay/features/product/ui/screens/product_details_scren.dart';
 import 'package:flutter/material.dart';
 class ProductItemWidget extends StatelessWidget {
   const ProductItemWidget({
     super.key,
+    required this.productModel,
   });
+
+  final ProductModel productModel;
 
   @override
   Widget build(BuildContext context) {
@@ -23,28 +27,27 @@ class ProductItemWidget extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
                     color: AppColors.themeColor.withOpacity(0.12),
                     borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(16),
                       topRight: Radius.circular(16),
                     )),
-                child: Image.asset(
-                  AssetPath.dummyImagePng,
-                  fit: BoxFit.fill,
+                child: Image.network(
+                  productModel.image ?? '',
+                  fit: BoxFit.cover,
                   width: 140,
-                  height: 90,
+                  // height: 90,
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   children: [
-                    const Text(
-                      'Nike Shoe - AK45394 New year deal',
+                     Text(
+                      productModel.title ?? '',
                       maxLines: 1,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.w600,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -54,23 +57,23 @@ class ProductItemWidget extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        const Text(
-                          '\$100',
-                          style: TextStyle(
+                        Text(
+                          productModel.price ?? '',
+                          style: const TextStyle(
                               fontWeight: FontWeight.w600,
                               color: AppColors.themeColor),
                         ),
-                        const Wrap(
-                          crossAxisAlignment: WrapCrossAlignment.center,
+                         Row(
+
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.star,
                               color: Colors.amber,
                               size: 16,
                             ),
                             Text(
-                              '4.5',
-                              style: TextStyle(
+                            '${productModel.star ?? '0.0'}',
+                              style: const TextStyle(
                                   fontWeight: FontWeight.w600,
                                   color: AppColors.themeColor),
                             ),

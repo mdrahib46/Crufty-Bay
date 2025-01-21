@@ -5,7 +5,7 @@ import 'package:cruftybay/services/networkcaller/network_response.dart';
 import 'package:cruftybay/services/networkcaller/networkcaller.dart';
 import 'package:get/get.dart';
 
-class ProductListController extends GetxController {
+class ProductListByRemarkController extends GetxController {
   bool _inProgress = false;
 
   bool get inProgress => _inProgress;
@@ -23,7 +23,7 @@ class ProductListController extends GetxController {
     _inProgress = false;
     update();
 
-    final NetworkResponse response = await Get.find<NetworkCaller>().getRequest(Urls.productListByRemark('popular'));
+    final NetworkResponse response = await Get.find<NetworkCaller>().getRequest(Urls.productListByRemark('Popular'));
     if (response.isSuccess) {
       _productListModel = ProductListModel.fromJson(response.responseData);
       isSuccess = false;

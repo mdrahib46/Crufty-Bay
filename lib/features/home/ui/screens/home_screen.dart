@@ -1,11 +1,13 @@
 import 'package:cruftybay/app/asset_path.dart';
 import 'package:cruftybay/features/common/data/models/category_model.dart';
+import 'package:cruftybay/features/common/data/models/product_model.dart';
 import 'package:cruftybay/features/common/ui/controllers/category_list_controller.dart';
 import 'package:cruftybay/features/common/ui/controllers/main_bottom_nab_controllers.dart';
 import 'package:cruftybay/features/common/ui/widgets/category_item_widget.dart';
 import 'package:cruftybay/features/common/ui/widgets/center_circular_progress_indicator.dart';
 import 'package:cruftybay/features/common/ui/widgets/product_item_widget.dart';
 import 'package:cruftybay/features/home/controller/home_banner_list_controller.dart';
+import 'package:cruftybay/features/home/controller/home_product_list_controller.dart';
 import 'package:cruftybay/features/home/ui/widgets/appbar_icon_button.dart';
 import 'package:cruftybay/features/home/ui/widgets/home_carousel_Slider.dart';
 import 'package:cruftybay/features/home/ui/widgets/home_section_header.dart';
@@ -75,11 +77,19 @@ class _HomeScreenState extends State<HomeScreen> {
                 onTap: () {},
               ),
               // const ProductItemWidget(),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: _getProductList(),
-                ),
+              GetBuilder<ProductListByRemarkController>(
+
+                builder: (controller) {
+                  if(controller.inProgress){
+                    return const CenterCircularProgressIndicator();
+                  }
+                  return SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: _getProductList(productList: controller.productList),
+                    ),
+                  );
+                }
               ),
               const SizedBox(height: 8),
               HomeSectionHeader(
@@ -90,7 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
-                  children: _getProductList(),
+                  children: _getProductList(productList: []),
                 ),
               ),
               const SizedBox(height: 8),
@@ -102,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
-                  children: _getProductList(),
+                  children: _getProductList(productList: []),
                 ),
               ),
             ],
@@ -123,15 +133,15 @@ class _HomeScreenState extends State<HomeScreen> {
     return categoryList;
   }
 
-  List<Widget> _getProductList(){
-    List<Widget> productList = [];
-    for(int i = 0; i < 10; i++){
-      productList.add(const Padding(
-        padding:  EdgeInsets.only(right: 16.0),
-        child: ProductItemWidget(),
+  List<Widget> _getProductList({required List <ProductModel> productList}){
+    List<Widget> list = [];
+    for(int i = 0; i < productList.length; i++){
+      list.add( Padding(
+        padding:  const EdgeInsets.only(right: 16.0),
+        child: ProductItemWidget(productModel: productList[i],),
       ));
     }
-    return productList;
+    return list;
   }
 
   AppBar _buildAppBar() {
