@@ -1,6 +1,6 @@
 import 'package:cruftybay/app/app_color.dart';
 import 'package:cruftybay/app/app_constants.dart';
-import 'package:cruftybay/features/auth/ui/screens/complete_profile_screen.dart';
+import 'package:cruftybay/features/auth/ui/screens/sign_up_screen.dart';
 import 'package:cruftybay/features/auth/ui/widgets/app_logo_widget.dart';
 import 'package:cruftybay/features/auth/ui/controller/otp_verification_controller.dart';
 import 'package:cruftybay/features/common/ui/controllers/auth_controller.dart';

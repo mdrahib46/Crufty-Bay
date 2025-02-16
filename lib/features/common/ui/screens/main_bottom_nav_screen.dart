@@ -3,7 +3,7 @@ import 'package:cruftybay/features/category/ui/screens/category_list_screen.dart
 import 'package:cruftybay/features/common/ui/controllers/category_list_controller.dart';
 import 'package:cruftybay/features/common/ui/controllers/main_bottom_nab_controllers.dart';
 import 'package:cruftybay/features/home/controller/home_banner_list_controller.dart';
-import 'package:cruftybay/features/home/controller/home_product_list_controller.dart';
+import 'package:cruftybay/features/home/controller/popular_product_list_by_remark_controller.dart';
 import 'package:cruftybay/features/home/ui/screens/home_screen.dart';
 import 'package:cruftybay/features/wishlist/ui/screens/wish_list_screen.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +34,7 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
   void initState() {
     _homeCarouselSliderController.getHomeBannerList();
     Get.find<CategoryListController>().getCategoryList();
-    Get.find<ProductListByRemarkController>().getProductList();
+    Get.find<PopularProductListByRemarkController>().getProductList();
     super.initState();
   }
 

@@ -61,10 +61,12 @@ class CreateProfileScreenController extends GetxController {
 
     if (response.isSuccess) {
       _errorMessage = null;
-      await Get.find<AuthController>().saveUserData(
-        AuthController.accessToken.toString(),
-        Get.find<ReadProfileController>().profileModel!,
-      );
+      // await Get.find<AuthController>().saveUserData(
+      //   AuthController.accessToken.toString()
+      //   // Get.find(ReadPr)
+      //   Get.find<ReadProfileController>().profileModel!,
+      //
+      // );
       _shouldNavigateMainBottomScreen = true;
       isSuccess = true;
       _inProgress = false;

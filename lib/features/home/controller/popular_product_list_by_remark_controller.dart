@@ -5,7 +5,7 @@ import 'package:cruftybay/services/networkcaller/network_response.dart';
 import 'package:cruftybay/services/networkcaller/networkcaller.dart';
 import 'package:get/get.dart';
 
-class ProductListByRemarkController extends GetxController {
+class PopularProductListByRemarkController extends GetxController {
   bool _inProgress = false;
 
   bool get inProgress => _inProgress;

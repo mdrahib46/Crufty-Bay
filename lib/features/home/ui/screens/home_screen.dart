@@ -7,7 +7,7 @@ import 'package:cruftybay/features/common/ui/widgets/category_item_widget.dart';
 import 'package:cruftybay/features/common/ui/widgets/center_circular_progress_indicator.dart';
 import 'package:cruftybay/features/common/ui/widgets/product_item_widget.dart';
 import 'package:cruftybay/features/home/controller/home_banner_list_controller.dart';
-import 'package:cruftybay/features/home/controller/home_product_list_controller.dart';
+import 'package:cruftybay/features/home/controller/popular_product_list_by_remark_controller.dart';
 import 'package:cruftybay/features/home/ui/widgets/appbar_icon_button.dart';
 import 'package:cruftybay/features/home/ui/widgets/home_carousel_Slider.dart';
 import 'package:cruftybay/features/home/ui/widgets/home_section_header.dart';
@@ -77,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 onTap: () {},
               ),
               // const ProductItemWidget(),
-              GetBuilder<ProductListByRemarkController>(
+              GetBuilder<PopularProductListByRemarkController>(
 
                 builder: (controller) {
                   if(controller.inProgress){

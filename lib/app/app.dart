@@ -1,7 +1,7 @@
 import 'package:cruftybay/app/app_theme_data.dart';
 import 'package:cruftybay/app/controller_binder.dart';
-import 'package:cruftybay/features/auth/ui/screens/complete_profile_screen.dart';
-import 'package:cruftybay/features/auth/ui/screens/email_verification_screen.dart';
+import 'package:cruftybay/features/auth/ui/screens/sign_up_screen.dart';
+import 'package:cruftybay/features/auth/ui/screens/signIn_screen.dart';
 import 'package:cruftybay/features/auth/ui/screens/otp_verification_screen.dart';
 import 'package:cruftybay/features/auth/ui/screens/splash_screen.dart';
 import 'package:cruftybay/features/category/ui/screens/category_list_screen.dart';
@@ -19,7 +19,7 @@ class CruftyBay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      initialRoute: MainBottomNavScreen.name,
+      initialRoute: SplashScreen.name,
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.light,
       theme: AppThemeData.lightThemeData,
@@ -30,18 +30,16 @@ class CruftyBay extends StatelessWidget {
       onGenerateRoute: (RouteSettings settings) {
         late Widget widget;
 
-        // if (settings.name == SplashScreen.name) {
-        //   widget = const SplashScreen();
-        // } else if (settings.name == EmailVerificationScreen.name) {
-        //   widget = const EmailVerificationScreen();
-        // } else if (settings.name == OtpVerificationScreen.name) {
-        //   String email = settings.arguments as String;
-        //   widget = OtpVerificationScreen(email: email);
-        // } else if (settings.name == CompleteProfileScreen.name) {
-        //   widget = const CompleteProfileScreen();
-        // } else
-        //
-        if (settings.name == MainBottomNavScreen.name) {
+        if (settings.name == SplashScreen.name) {
+          widget = const SplashScreen();
+        } else if (settings.name == SignInScreen.name) {
+          widget = const SignInScreen();
+        } else if (settings.name == OtpVerificationScreen.name) {
+          String email = settings.arguments as String;
+          widget = OtpVerificationScreen(email: email);
+        } else if (settings.name == CompleteProfileScreen.name) {
+          widget = const CompleteProfileScreen();
+        } else if (settings.name == MainBottomNavScreen.name) {
           widget = const MainBottomNavScreen();
         } else if (settings.name == CategoryListScreen.name) {
           widget = const CategoryListScreen();

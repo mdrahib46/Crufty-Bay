@@ -1,7 +1,5 @@
 import 'dart:convert';
-
-import 'package:cruftybay/features/auth/data/model/profile_model.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:cruftybay/features/auth/data/model/sign_in_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthController {
@@ -9,7 +7,7 @@ class AuthController {
   static const  _profileDataKey = 'access-token';
 
   static String? accessToken;
-  static ProfileModel? profileModel;
+  static User? profileModel;
 
 
   static Future<void> saveAccessToken(String token) async{
@@ -24,17 +22,18 @@ class AuthController {
     accessToken = token;
     return token;
   }
-  Future<void> saveUserData(String accessToken, ProfileModel model) async {
+  Future<void> saveUserData(String accessToken, User userModel) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     await sharedPreferences.setString(_accessTokenKey, accessToken);
     await sharedPreferences.setString(
-        _profileDataKey, jsonEncode(model.toJson()));
+        _profileDataKey, jsonEncode(userModel.toJson()));
+    profileModel = userModel;
   }
 
   Future<void> getUserData() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     accessToken = sharedPreferences.getString(_accessTokenKey);
-    profileModel = ProfileModel.fromJson(
+    profileModel = User.fromJson(
       jsonDecode(sharedPreferences.getString(_profileDataKey)!),
     );
   }

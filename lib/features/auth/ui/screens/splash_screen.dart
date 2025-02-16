@@ -1,5 +1,5 @@
 import 'package:cruftybay/app/app_color.dart';
-import 'package:cruftybay/features/auth/ui/screens/email_verification_screen.dart';
+import 'package:cruftybay/features/auth/ui/screens/signIn_screen.dart';
 import 'package:flutter/material.dart';
 import '../widgets/app_logo_widget.dart';
 
@@ -21,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> _moveToNextScreen() async {
     await Future.delayed(const Duration(seconds: 3));
-    Navigator.pushReplacementNamed(context, EmailVerificationScreen.name);
+    Navigator.pushReplacementNamed(context, SignInScreen.name);
   }
 
   @override
