@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cruftybay/features/common/data/models/error_response_model.dart';
 import 'package:cruftybay/features/common/ui/controllers/auth_controller.dart';
 import 'package:cruftybay/services/networkcaller/network_response.dart';
 import 'package:http/http.dart';
@@ -25,7 +26,7 @@ class NetworkCaller {
       _logRequest(url);
       Response response = await get(uri, headers: headers);
       _logResponse(url, response.statusCode, response.headers, response.body);
-      if (response.statusCode == 200 ) {
+      if (response.statusCode == 200 || response.statusCode == 201) {
         final decodedMessage = jsonDecode(response.body);
           return NetworkResponse(isSuccess: true, statusCode: response.statusCode, responseData: decodedMessage);
       } else {
@@ -51,15 +52,17 @@ class NetworkCaller {
       Response response =
       await post(uri, headers: headers, body: jsonEncode(body));
       _logResponse(url, response.statusCode, response.headers, response.body);
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200 || response.statusCode == 201) {
         final decodedMessage = jsonDecode(response.body);
         return NetworkResponse(
             isSuccess: true,
             statusCode: response.statusCode,
             responseData: decodedMessage);
       } else {
+        final decodedMessage = jsonDecode(response.body);
+        ErrorResponseModel errorResponseModel = ErrorResponseModel.fromJson(decodedMessage);
         return NetworkResponse(
-            isSuccess: false, statusCode: response.statusCode);
+            isSuccess: false, statusCode: response.statusCode, errorMessage: errorResponseModel.msg,);
       }
     } catch (e) {
       _logResponse(url, -1, null, '', e.toString());

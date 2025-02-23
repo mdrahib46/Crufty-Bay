@@ -1,9 +1,7 @@
 import 'package:cruftybay/app/app_color.dart';
 import 'package:cruftybay/app/app_constants.dart';
-import 'package:cruftybay/features/auth/ui/screens/sign_up_screen.dart';
 import 'package:cruftybay/features/auth/ui/widgets/app_logo_widget.dart';
 import 'package:cruftybay/features/auth/ui/controller/otp_verification_controller.dart';
-import 'package:cruftybay/features/common/ui/controllers/auth_controller.dart';
 import 'package:cruftybay/features/common/ui/screens/main_bottom_nav_screen.dart';
 import 'package:cruftybay/features/common/ui/widgets/center_circular_progress_indicator.dart';
 import 'package:cruftybay/features/common/ui/widgets/snackbar_message.dart';
@@ -79,7 +77,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                   const SizedBox(height: 24),
                   PinCodeTextField(
                     appContext: context,
-                    length: 6,
+                    length: 4,
                     obscureText: false,
                     animationType: AnimationType.fade,
                     animationDuration: const Duration(milliseconds: 300),
@@ -93,7 +91,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                     keyboardType: TextInputType.number,
                     controller: _otpTEController,
                     validator: (String? value) {
-                      if (value?.length != 6) {
+                      if (value?.length != 4) {
                         return "Enter your OTP";
                       }
                       return null;
@@ -102,12 +100,13 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                   const SizedBox(height: 16),
                   GetBuilder<OTPVerificationController>(
                     builder: (controller) {
-                      if (controller.inProgress) {
-                        return const CenterCircularProgressIndicator();
-                      }
-                      return ElevatedButton(
-                        onPressed: _onTapNextButton,
-                        child: const Text('Next'),
+                      return Visibility(
+                        visible: controller.inProgress == false,
+                        replacement: const CenterCircularProgressIndicator(),
+                        child: ElevatedButton(
+                          onPressed: _onTapNextButton,
+                          child: const Text('Next'),
+                        ),
                       );
                     },
                   ),
@@ -161,14 +160,8 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     if (_formKey.currentState!.validate()) {
       final bool isSuccess = await _otpVerificationController.verifyOTP(widget.email, _otpTEController.text);
       if (isSuccess) {
-        if (Get.find<OTPVerificationController>().shouldNavigateCompleteProfile) {
-          if (mounted) {
-            Navigator.pushNamed(context, CompleteProfileScreen.name);
-          }
-        } else {
-          if (mounted) {
-            Navigator.pushNamedAndRemoveUntil(context, MainBottomNavScreen.name, (predicate) => false);
-          }
+        if (mounted) {
+          Navigator.pushNamedAndRemoveUntil(context, MainBottomNavScreen.name, (predicate) => false);
         }
       } else {
         if (mounted) {

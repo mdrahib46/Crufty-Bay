@@ -90,7 +90,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     }
                     return ElevatedButton(
                         onPressed: _onTapNextButton,
-                        child: const Text('SignIn'));
+                        child: const Text('Sign In'));
                   }
                 )
               ],

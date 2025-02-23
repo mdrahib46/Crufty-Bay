@@ -37,8 +37,8 @@ class CruftyBay extends StatelessWidget {
         } else if (settings.name == OtpVerificationScreen.name) {
           String email = settings.arguments as String;
           widget = OtpVerificationScreen(email: email);
-        } else if (settings.name == CompleteProfileScreen.name) {
-          widget = const CompleteProfileScreen();
+        } else if (settings.name == SignUpScreen.name) {
+          widget = const SignUpScreen();
         } else if (settings.name == MainBottomNavScreen.name) {
           widget = const MainBottomNavScreen();
         } else if (settings.name == CategoryListScreen.name) {
