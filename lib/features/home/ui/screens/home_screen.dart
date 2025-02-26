@@ -43,12 +43,12 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 16),
               ProductSearchBar(searchTEController: _searchBarController),
               const SizedBox(height: 16),
-              GetBuilder<HomeCarouselSliderController>(
+              GetBuilder<SliderListController>(
                 builder: (controller) {
                   if(controller.inProgress){
                     return const CenterCircularProgressIndicator();
                   }
-                  return HomeCarouselSlider(bannerList: controller.bannerList,);
+                  return HomeCarouselSlider(sliderList: controller.bannerList);
                 }
               ),
               const SizedBox(height: 16),

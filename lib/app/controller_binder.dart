@@ -22,7 +22,7 @@ class ControllerBinder extends Bindings{
     Get.put(SignUpController());
     Get.put(OTPVerificationController());
     Get.put(ReadProfileController());
-    Get.put(HomeCarouselSliderController());
+    Get.put(SliderListController());
     Get.put(CategoryListController());
     Get.put(PopularProductListByRemarkController());
   }

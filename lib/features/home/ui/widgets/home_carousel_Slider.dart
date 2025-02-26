@@ -1,12 +1,12 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cruftybay/app/app_color.dart';
-import 'package:cruftybay/features/home/data/model/bannner_model.dart';
+import 'package:cruftybay/features/home/data/model/SliderModel.dart';
 import 'package:flutter/material.dart';
 
 class HomeCarouselSlider extends StatefulWidget {
-  const HomeCarouselSlider({super.key, required this.bannerList});
+  const HomeCarouselSlider({super.key, required this.sliderList});
 
-  final List<BannerModel> bannerList;
+  final List<SliderModel> sliderList;
 
   @override
   State<HomeCarouselSlider> createState() => _HomeCarouselSliderState();
@@ -26,14 +26,14 @@ class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
               onPageChanged: (currentIndex, reason) {
                 _selectedIndex.value = currentIndex;
               }),
-          items: widget.bannerList.map((banner) {
+          items: widget.sliderList.map((banner) {
             return Builder(
               builder: (BuildContext context) {
                 return Container(
                   width: MediaQuery.of(context).size.width,
                   margin: const EdgeInsets.symmetric(horizontal: 5.0),
                   decoration: BoxDecoration(
-                    image: DecorationImage(image: NetworkImage(banner.image ?? ''), fit: BoxFit.cover),
+                    image: DecorationImage(image: NetworkImage(banner.photoUrl ?? ''), fit: BoxFit.cover),
                     color: AppColors.themeColor,
                     borderRadius: BorderRadius.circular(8),
                   ),
@@ -44,7 +44,7 @@ class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          banner.title ?? '',
+                          banner.description ?? '',
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                             fontSize: 18.0,
@@ -75,7 +75,7 @@ class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
             return Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                for (int i = 0; i < widget.bannerList.length; i++)
+                for (int i = 0; i < widget.sliderList.length; i++)
                   Container(
                     margin: const EdgeInsets.symmetric(horizontal: 2),
                     height: 12,

@@ -21,7 +21,7 @@ class MainBottomNavScreen extends StatefulWidget {
 
 class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
   final MainBottomNabController bottomNabController = Get.find<MainBottomNabController>();
-  final HomeCarouselSliderController _homeCarouselSliderController = Get.find<HomeCarouselSliderController>();
+  final SliderListController _homeCarouselSliderController = Get.find<SliderListController>();
 
   final List<Widget> _screens = const [
     HomeScreen(),
