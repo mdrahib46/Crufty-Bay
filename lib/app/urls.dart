@@ -9,6 +9,6 @@ class Urls{
 
   static String readProfile = '$_baseUrl/ReadProfile';
   // static String homeSlideUrl = '$_baseUrl/slides';
-  static String categoryList = "$_baseUrl/CategoryList";
+  static String categoryList = "$_baseUrl/categories";
   static String productListByRemark(String remark) => "$_baseUrl/ListProductByRemark/$remark";
 }

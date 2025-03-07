@@ -6,10 +6,34 @@ import 'package:cruftybay/features/common/ui/widgets/center_circular_progress_in
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CategoryListScreen extends StatelessWidget {
+class CategoryListScreen extends StatefulWidget {
   const CategoryListScreen({super.key});
 
   static const String name = "/Category-List Screen";
+
+  @override
+  State<CategoryListScreen> createState() => _CategoryListScreenState();
+}
+
+class _CategoryListScreenState extends State<CategoryListScreen> {
+
+  final CategoryListController _categoryListController = Get.find<CategoryListController>();
+  late  final ScrollController _scrollController;
+
+  @override
+  void initState() {
+    _scrollController = ScrollController();
+    _scrollController.addListener(_loadMoreDate);
+    _categoryListController.getCategoryList();
+    super.initState();
+  }
+
+  void  _loadMoreDate(){
+    if(_scrollController.position.extentAfter < 300){
+        _categoryListController.getCategoryList();
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -32,32 +56,41 @@ class CategoryListScreen extends StatelessWidget {
           },
           child: GetBuilder<CategoryListController>(
             builder: (controller) {
-              if(controller.inProgress){
-                return const CenterCircularProgressIndicator();
+              if(controller.initialInProgress){
+                return const Column(
+                  children: [
+                    CenterCircularProgressIndicator(),
+                  ],
+                );
               }
-              return GridView.builder(
-                itemCount: controller.categoryList.length,
-                gridDelegate:  const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 4,
-                  crossAxisSpacing: 4,
-                  mainAxisSpacing: 16,
+              return Column(
+                children: [
+                  Expanded(
+                    child: GridView.builder(
+                      controller: _scrollController,
+                      itemCount: controller.categoryList.length,
+                      gridDelegate:  const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 4,
+                        crossAxisSpacing: 4,
+                        mainAxisSpacing: 16,
+                      ),
+                      itemBuilder: (context, index) {
+                        return  FittedBox(
+                          child: CategoryItemWidget(categoryModel: controller.categoryList[index],),
+                        );
+                      },
+                    ),
+                  ),
+                  Visibility(
+                  visible: controller.inProgress,
+                  child: const LinearProgressIndicator(),
                 ),
-                itemBuilder: (context, index) {
-                  return  FittedBox(
-                    child: CategoryItemWidget(categoryModel: controller.categoryList[index],),
-                  );
-                },
-              );
+              ],
+            );
             }
           ),
         ),
       ),
     );
   }
-
-
-  // this function is not working !
-  // void _onPop() {
-  //   Get.find<MainBottomNabController>().backToHome();
-  // }
 }

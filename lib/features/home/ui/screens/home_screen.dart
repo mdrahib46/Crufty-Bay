@@ -16,8 +16,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -29,7 +27,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController _searchBarController = TextEditingController();
-
 
   @override
   Widget build(BuildContext context) {
@@ -43,54 +40,47 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 16),
               ProductSearchBar(searchTEController: _searchBarController),
               const SizedBox(height: 16),
-              GetBuilder<SliderListController>(
-                builder: (controller) {
-                  if(controller.inProgress){
-                    return const CenterCircularProgressIndicator();
-                  }
-                  return HomeCarouselSlider(sliderList: controller.bannerList);
+              GetBuilder<SliderListController>(builder: (controller) {
+                if (controller.inProgress) {
+                  return const CenterCircularProgressIndicator();
                 }
-              ),
+                return HomeCarouselSlider(sliderList: controller.bannerList);
+              }),
               const SizedBox(height: 16),
               HomeSectionHeader(
                 title: "Category",
                 onTap: () {
-                 Get.find<MainBottomNabController>().moveToCategory();
+                  Get.find<MainBottomNabController>().moveToCategory();
                 },
               ),
-              GetBuilder<CategoryListController>(
-                builder: (controller) {
-                  if(controller.inProgress){
-                    return const CenterCircularProgressIndicator();
-                  }
-                  return SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: _getCategoryList(controller.categoryList),
-                    ),
-                  );
+              GetBuilder<CategoryListController>(builder: (controller) {
+                if (controller.inProgress) {
+                  return const CenterCircularProgressIndicator();
                 }
-              ),
+                return SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                      // children: _getCategoryList(controller.categoryList),
+                      ),
+                );
+              }),
               const SizedBox(height: 8),
               HomeSectionHeader(
                 title: "Popular",
                 onTap: () {},
               ),
               // const ProductItemWidget(),
-              GetBuilder<PopularProductListByRemarkController>(
-
-                builder: (controller) {
-                  if(controller.inProgress){
-                    return const CenterCircularProgressIndicator();
-                  }
-                  return SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: _getProductList(productList: controller.productList),
-                    ),
-                  );
+              GetBuilder<PopularProductListByRemarkController>(builder: (controller) {
+                if (controller.inProgress) {
+                  return const CenterCircularProgressIndicator();
                 }
-              ),
+                return SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: _getProductList(productList: controller.productList),
+                  ),
+                );
+              }),
               const SizedBox(height: 8),
               HomeSectionHeader(
                 title: "Special",
@@ -125,20 +115,24 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Widget> _getCategoryList(List<CategoryModel> categoryModel) {
     List<Widget> categoryList = [];
     for (int i = 0; i < categoryModel.length; i++) {
-      categoryList.add( Padding(
+      categoryList.add(Padding(
         padding: const EdgeInsets.only(right: 16.0),
-        child: CategoryItemWidget(categoryModel: categoryModel[i],),
+        // child: CategoryItemWidget(
+        //   categoryModel: categoryModel[i],
+        // ),
       ));
     }
     return categoryList;
   }
 
-  List<Widget> _getProductList({required List <ProductModel> productList}){
+  List<Widget> _getProductList({required List<ProductModel> productList}) {
     List<Widget> list = [];
-    for(int i = 0; i < productList.length; i++){
-      list.add( Padding(
-        padding:  const EdgeInsets.only(right: 16.0),
-        child: ProductItemWidget(productModel: productList[i],),
+    for (int i = 0; i < productList.length; i++) {
+      list.add(Padding(
+        padding: const EdgeInsets.only(right: 16.0),
+        child: ProductItemWidget(
+          productModel: productList[i],
+        ),
       ));
     }
     return list;
@@ -167,4 +161,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-
