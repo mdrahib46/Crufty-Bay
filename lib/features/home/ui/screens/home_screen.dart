@@ -1,4 +1,5 @@
 import 'package:cruftybay/app/asset_path.dart';
+import 'package:cruftybay/features/common/data/models/category/category_pagination_model.dart';
 import 'package:cruftybay/features/common/data/models/category_model.dart';
 import 'package:cruftybay/features/common/data/models/product_model.dart';
 import 'package:cruftybay/features/common/ui/controllers/category_list_controller.dart';
@@ -60,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 return SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
-                      // children: _getCategoryList(controller.categoryList),
+                      children: _getCategoryList(controller.categoryList),
                       ),
                 );
               }),
@@ -112,15 +113,17 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  List<Widget> _getCategoryList(List<CategoryModel> categoryModel) {
+  List<Widget> _getCategoryList(List<CategoryItemModel> categoryModels) {
     List<Widget> categoryList = [];
-    for (int i = 0; i < categoryModel.length; i++) {
-      categoryList.add(Padding(
-        padding: const EdgeInsets.only(right: 16.0),
-        // child: CategoryItemWidget(
-        //   categoryModel: categoryModel[i],
-        // ),
-      ));
+    for (int i = 0; i < categoryModels.length; i++) {
+      categoryList.add(
+        Padding(
+          padding: const EdgeInsets.only(right: 16.0),
+          child: CategoryItemWidget(
+            categoryModel: categoryModels[i],
+          ),
+        ),
+      );
     }
     return categoryList;
   }

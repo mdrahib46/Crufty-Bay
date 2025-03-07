@@ -83,15 +83,15 @@ class CategoryItemModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['_id'] = this.sId;
-    data['title'] = this.title;
-    data['slug'] = this.slug;
-    data['description'] = this.description;
-    data['icon'] = this.icon;
-    data['parent'] = this.parent;
-    data['createdAt'] = this.createdAt;
-    data['updatedAt'] = this.updatedAt;
-    data['__v'] = this.iV;
+    data['_id'] = sId;
+    data['title'] = title;
+    data['slug'] = slug;
+    data['description'] = description;
+    data['icon'] = icon;
+    data['parent'] = parent;
+    data['createdAt'] = createdAt;
+    data['updatedAt'] = updatedAt;
+    data['__v'] = iV;
     return data;
   }
 }
