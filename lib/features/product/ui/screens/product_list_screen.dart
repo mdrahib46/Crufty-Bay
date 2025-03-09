@@ -1,5 +1,3 @@
-import 'package:cruftybay/features/category/ui/screens/category_list_screen.dart';
-import 'package:cruftybay/features/common/ui/widgets/product_item_widget.dart';
 import 'package:flutter/material.dart';
 
 class ProductListScreen extends StatefulWidget {

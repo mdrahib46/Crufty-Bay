@@ -2,7 +2,6 @@ import 'package:cruftybay/features/auth/data/model/signup_params.dart';
 import 'package:cruftybay/features/auth/ui/controller/sign_up_controller.dart';
 import 'package:cruftybay/features/auth/ui/screens/otp_verification_screen.dart';
 import 'package:cruftybay/features/auth/ui/widgets/app_logo_widget.dart';
-import 'package:cruftybay/features/common/ui/screens/main_bottom_nav_screen.dart';
 import 'package:cruftybay/features/common/ui/widgets/center_circular_progress_indicator.dart';
 import 'package:cruftybay/features/common/ui/widgets/snackbar_message.dart';
 import 'package:email_validator/email_validator.dart';

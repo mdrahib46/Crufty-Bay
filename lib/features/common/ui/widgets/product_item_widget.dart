@@ -1,5 +1,4 @@
 import 'package:cruftybay/app/app_color.dart';
-import 'package:cruftybay/app/asset_path.dart';
 import 'package:cruftybay/features/common/data/models/product_model.dart';
 import 'package:cruftybay/features/product/ui/screens/product_details_scren.dart';
 import 'package:flutter/material.dart';

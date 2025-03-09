@@ -17,7 +17,7 @@ class CategoryItemWidget extends StatelessWidget {
       onTap: () {
         Navigator.pushNamed(context, ProductListScreen.name, arguments: {
           'categoryName': categoryModel.title ?? '',
-          'categoryId': categoryModel.sId ?? '',
+          // 'categoryId': categoryModel.sId ?? '',
         });
       },
       child: Column(

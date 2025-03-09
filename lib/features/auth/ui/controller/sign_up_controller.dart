@@ -1,8 +1,5 @@
 import 'package:cruftybay/app/urls.dart';
-import 'package:cruftybay/features/auth/data/model/auth_success_model.dart';
 import 'package:cruftybay/features/auth/data/model/signup_params.dart';
-import 'package:cruftybay/features/auth/ui/controller/read_profile_controller.dart';
-import 'package:cruftybay/features/common/ui/controllers/auth_controller.dart';
 import 'package:cruftybay/services/networkcaller/network_response.dart';
 import 'package:cruftybay/services/networkcaller/networkcaller.dart';
 import 'package:get/get.dart';

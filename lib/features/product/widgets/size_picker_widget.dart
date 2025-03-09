@@ -1,6 +1,5 @@
 import 'package:cruftybay/app/app_color.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 class SizePickerWidget extends StatefulWidget {
   const SizePickerWidget(

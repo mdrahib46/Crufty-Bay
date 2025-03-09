@@ -30,16 +30,5 @@ class PaginationModel<T extends FromJsonContract> {
       lastPage: json['last_page'],
     );
   }
-// Map<String, dynamic> toJson() {
-//   final Map<String, dynamic> data = <String, dynamic>{};
-//   if (results != null) {
-//     data['results'] = results!.map((v) => v.toJson()).toList();
-//   }
-//   data['total'] = total;
-//   data['first_page'] = firstPage;
-//   data['previous'] = previous;
-//   data['next'] = next;
-//   data['last_page'] = lastPage;
-//   return data;
-// }
+
 }

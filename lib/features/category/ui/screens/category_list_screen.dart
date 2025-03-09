@@ -52,16 +52,12 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
         ),
         body: RefreshIndicator(
           onRefresh: ()async{
-            Get.find<CategoryListController>().getCategoryList();
+            Get.find<CategoryListController>().refreshCategoryList();
           },
           child: GetBuilder<CategoryListController>(
             builder: (controller) {
               if(controller.initialInProgress){
-                return const Column(
-                  children: [
-                    CenterCircularProgressIndicator(),
-                  ],
-                );
+                return const Center(child: CenterCircularProgressIndicator(),);
               }
               return Column(
                 children: [

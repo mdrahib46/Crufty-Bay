@@ -46,7 +46,7 @@ class _CartListScreenState extends State<CartListScreen> {
           ],
         ),
       ),
-    );;
+    );
   }
 
   Widget _buildPriceAndCheckoutSection(TextTheme textTheme) {

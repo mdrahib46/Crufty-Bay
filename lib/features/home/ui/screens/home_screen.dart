@@ -1,6 +1,5 @@
 import 'package:cruftybay/app/asset_path.dart';
 import 'package:cruftybay/features/common/data/models/category/category_pagination_model.dart';
-import 'package:cruftybay/features/common/data/models/category_model.dart';
 import 'package:cruftybay/features/common/data/models/product_model.dart';
 import 'package:cruftybay/features/common/ui/controllers/category_list_controller.dart';
 import 'package:cruftybay/features/common/ui/controllers/main_bottom_nab_controllers.dart';
@@ -54,6 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Get.find<MainBottomNabController>().moveToCategory();
                 },
               ),
+
               GetBuilder<CategoryListController>(builder: (controller) {
                 if (controller.inProgress) {
                   return const CenterCircularProgressIndicator();
@@ -61,16 +61,18 @@ class _HomeScreenState extends State<HomeScreen> {
                 return SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
-                      children: _getCategoryList(controller.categoryList),
-                      ),
+                    children: _getCategoryList(controller.categoryList),
+                  ),
                 );
               }),
+
               const SizedBox(height: 8),
+
               HomeSectionHeader(
                 title: "Popular",
                 onTap: () {},
               ),
-              // const ProductItemWidget(),
+
               GetBuilder<PopularProductListByRemarkController>(builder: (controller) {
                 if (controller.inProgress) {
                   return const CenterCircularProgressIndicator();
@@ -82,24 +84,28 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 );
               }),
+
               const SizedBox(height: 8),
+
               HomeSectionHeader(
                 title: "Special",
                 onTap: () {},
               ),
-              // const ProductItemWidget(),
+
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: _getProductList(productList: []),
                 ),
               ),
+
               const SizedBox(height: 8),
+
               HomeSectionHeader(
                 title: "New",
                 onTap: () {},
               ),
-              // const ProductItemWidget(),
+
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
@@ -118,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
     for (int i = 0; i < categoryModels.length; i++) {
       categoryList.add(
         Padding(
-          padding: const EdgeInsets.only(right: 16.0),
+          padding: const EdgeInsets.all(8.0),
           child: CategoryItemWidget(
             categoryModel: categoryModels[i],
           ),

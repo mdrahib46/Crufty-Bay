@@ -53,7 +53,7 @@ class CategoryItemModel {
   String? slug;
   String? description;
   String? icon;
-  Null? parent;
+  Null parent;
   String? createdAt;
   String? updatedAt;
   int? iV;
@@ -81,17 +81,17 @@ class CategoryItemModel {
     iV = json['__v'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['_id'] = sId;
-    data['title'] = title;
-    data['slug'] = slug;
-    data['description'] = description;
-    data['icon'] = icon;
-    data['parent'] = parent;
-    data['createdAt'] = createdAt;
-    data['updatedAt'] = updatedAt;
-    data['__v'] = iV;
-    return data;
-  }
+  // Map<String, dynamic> toJson() {
+  //   final Map<String, dynamic> data = <String, dynamic>{};
+  //   data['_id'] = sId;
+  //   data['title'] = title;
+  //   data['slug'] = slug;
+  //   data['description'] = description;
+  //   data['icon'] = icon;
+  //   data['parent'] = parent;
+  //   data['createdAt'] = createdAt;
+  //   data['updatedAt'] = updatedAt;
+  //   data['__v'] = iV;
+  //   return data;
+  // }
 }

@@ -1,6 +1,5 @@
 import 'package:cruftybay/app/app_color.dart';
 import 'package:cruftybay/features/auth/ui/screens/signIn_screen.dart';
-import 'package:cruftybay/features/auth/ui/screens/sign_up_screen.dart';
 import 'package:cruftybay/features/common/ui/controllers/auth_controller.dart';
 import 'package:cruftybay/features/common/ui/screens/main_bottom_nav_screen.dart';
 import 'package:flutter/material.dart';

@@ -33,7 +33,7 @@ class _ProductImageCarouselSliderState
                 return Container(
                   width: MediaQuery.of(context).size.width,
                   // margin: const EdgeInsets.only(left: 2),
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Colors.black12,
                   ),
                   alignment: Alignment.center,

@@ -8,7 +8,6 @@ import 'package:cruftybay/features/home/ui/screens/home_screen.dart';
 import 'package:cruftybay/features/wishlist/ui/screens/wish_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 class MainBottomNavScreen extends StatefulWidget {
   const MainBottomNavScreen({super.key});
