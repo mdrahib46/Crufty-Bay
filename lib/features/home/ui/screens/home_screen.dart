@@ -1,5 +1,6 @@
 import 'package:cruftybay/app/asset_path.dart';
 import 'package:cruftybay/features/common/data/models/category/category_pagination_model.dart';
+import 'package:cruftybay/features/common/data/models/product_list_model.dart';
 import 'package:cruftybay/features/common/data/models/product_model.dart';
 import 'package:cruftybay/features/common/ui/controllers/category_list_controller.dart';
 import 'package:cruftybay/features/common/ui/controllers/main_bottom_nab_controllers.dart';
@@ -12,6 +13,7 @@ import 'package:cruftybay/features/home/ui/widgets/appbar_icon_button.dart';
 import 'package:cruftybay/features/home/ui/widgets/home_carousel_Slider.dart';
 import 'package:cruftybay/features/home/ui/widgets/home_section_header.dart';
 import 'package:cruftybay/features/home/ui/widgets/search-bar.dart';
+import 'package:cruftybay/features/product/ui/controller/product_list_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -73,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 onTap: () {},
               ),
 
-              GetBuilder<PopularProductListByRemarkController>(builder: (controller) {
+              GetBuilder<ProductListController>(builder: (controller) {
                 if (controller.inProgress) {
                   return const CenterCircularProgressIndicator();
                 }

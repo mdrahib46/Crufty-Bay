@@ -7,6 +7,7 @@ import 'package:cruftybay/features/common/ui/controllers/category_list_controlle
 import 'package:cruftybay/features/common/ui/controllers/main_bottom_nab_controllers.dart';
 import 'package:cruftybay/features/home/controller/home_banner_list_controller.dart';
 import 'package:cruftybay/features/home/controller/popular_product_list_by_remark_controller.dart';
+import 'package:cruftybay/features/product/ui/controller/product_list_controller.dart';
 import 'package:cruftybay/services/networkcaller/networkcaller.dart';
 import 'package:get/get.dart';
 
@@ -24,6 +25,8 @@ class ControllerBinder extends Bindings{
     Get.put(ReadProfileController());
     Get.put(SliderListController());
     Get.put(CategoryListController());
+    Get.put(ProductListController());
+
     Get.put(PopularProductListByRemarkController());
   }
 }
